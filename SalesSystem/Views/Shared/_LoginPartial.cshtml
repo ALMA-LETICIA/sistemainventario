@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+     <!--Aquí tenemos los enlaces donde tenemos la etiqueta "a"que contiene el enlace para poder ejecutar
+         la página registrar por defecto que nos ha proporcionado nuestro proyecto y esa pag. registrar 
+         se encuentra en la area "identity", pero Como nosotros ocuparemos nuestra propia página Escribiremos "Users", 
+         dentro de una carpera llamada account y nuestro archivo se llama registrar-->
+        <a class="nav-link text-dark" asp-area="Users" asp-page="/Account/Registrar">Registrar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>

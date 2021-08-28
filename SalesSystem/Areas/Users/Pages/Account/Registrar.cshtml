@@ -1,0 +1,136 @@
+﻿
+@page "/Users/Registrar"
+@model RegistrarModel
+@{
+    <!--Creamos la variable que va a contener la dirección de una imágen, en donde le asignamos la cadena de texto que es la dirección de una imágen por defecto que es de tipo png"-->
+    var image = "/images/images/default.png";
+}
+<!--Personalizae la URL de nistra pag. para que el isiario no visualice toda la direción completa por defecto de esta pag-->
+<!--(Linea 2)Dentro de comillas dobles ponemos la nueva dirección que va a ocupar esta pagina para poder ejecutarse (esta es la direcion que se mostrará al ejecutarse la pag)-->
+<!--Para verificar que estamos en la sig. Pagina colocamos un H1 con un dato-->
+<!--Crear código para poder diseñar o crear nuestra interfáz registrar-->
+<!--Con esta clase vamos a proporcionar estilos a nuetros elementos que nosotros iremos creando en nuestras visatas o nuestras páginas-->
+
+<div class="container p-4">
+    <!--Creamos un formulario que va a enviar la información por el método post y colocamos el sig. atributo porque le vamos a indicar al formulario que vamos a tratar archivos-->
+    <form method="post" enctype="multipart/form-data">
+        <!--Dentro del formulario creamos otro div para poder crear filas y en esas filas crear columnas-->
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <!--Creamos otro div para poder crear una tarjeta utilizando la clase:"class="card text-center" centrando el texto-->
+                <div class="card text-center">
+                    <!--Colocamos otro div para poder crear la cabecera de la tarjeta-->
+                    <div class="card-header">
+                        <!--Proporcionamos in Id"imageUser"-->
+                        <output id="imageUser">
+                            <!--Colocamos la etiqueta img para poder mostrar una imagen y le proporcionamos el siguiente atributo y a este atributo le asignamos una variable llamada imagen y le proporcionamos una clase imageUser"-->
+                            <img src=@image class="imageUser" />
+                        </output>
+
+                    </div>
+                    <!--Colocamos un div para poder crear el cuerpo de la tarjeta-->
+                    <div class="card-body">
+                        <!--Colocamos otro div-->
+                        <div class="caption text-center">
+                            <!--Colocamos una etiqueta label, le vamos a proporcionar una clse para darle estilo a un botón, vinculamos este label utilizando el siguiente atributo al siguiente input de tipo files y en el texto de este label colocamos "cargar foto"-->
+                            <label class="btn-btn-primary" for="files">Cargar foto</label>
+                            <!--Cargamos solo archivos de tipo image-->
+                            <input asp-for="Input.AvatarImage" accept="image/*" type="file" id="files">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-5">
+                <!--Este div lo utilizamos para poder crear un panel-->
+                <div class="panel panel-primary">
+                    <!--Creamos la cabecera del panel-->
+                    <div class="panel-heading">
+                        <!--Colocamos un H3, proporcionandole un estilo para que el texto que esté en h3 sea un titulo Registrar usuarios-->
+                        <h3 class="panel-title">Registrar usuarios</h3>
+                    </div>
+                    <!--Colocamos otro div para poder colocar el cuerpo del panel-->
+                    <div class="panel-body">
+                        <!--Colocamos otro div para poder crear un acordión-->
+                        <div class="accordion" id="accordionExample">
+                            <!--Colocamos una tarjeta-->
+                            <div class="card">
+                                <!--Creamos la cabecera de esta tarjeta-->
+                                <div class="card-header" id="headingOne">
+                                    <!--Creamos un div para poder mostrar la información de la cabecera-->
+                                    <div id="header" class="bg-info">
+                                        <!--Colocamos un H2, proporcionandole la sig. clase-->
+                                        <h2 class="mb-0 t">
+                                            <!--Creamos un botón(le proporcionamos la clase para darle un estilo de botón y se le va a proporcionar los siguientes elementos porque haremos una especie de animación de un colapso, donde vamos a ejecutar un div que va a coneter la sig. ID, Cada vez que nosostros presionemos este botón  un enlace en donde esté este texto "Ingresar información" se va a generar una especie de colapso de acordión)-->
+                                            <button class="btn btn-link text-light " type="button" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Ingresar Información
+                                            </button>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <!--Colocamos el sig. div que vamos a utilizar para poder crear el colapso y que va a contener el contendo(cada vez que presionemos el sig. botón(collapseOne) ejecutamos el siguiente div que va a contener una animación)-->
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                     data-parent="#accordionExample">
+                                    <!--Dentro de este div colocamos el div para poder crear el cuerpo de la tarjeta)-->
+                                    <div class="card-body">
+                                        <!--Creamos un div para agrupar controles-->
+                                        <div class="form-group">
+                                            <!--Colocamos un input que estará vinculado utilizando el "asp-for" a la propiedad NID, a este input le vamos a proporcionar un "placeholder" para poder mostrar en el campo de text el siguiente texto "NID", Sele va a proporcionar una clase para darle un estilo a este control"form-control" y colocamos el elemento "autofocus required" para poder requerir un dato, pero como ya estamos validando estos campos de texto por el lado del servidor, n es necesario por ahora este elemento. Colocamos el atributo "autofocus" para poder colocar el focus en este campo de texto-->
+                                            <input asp-for="Input.NID" placeholder="NID" class="form-control" autofocus />
+                                            <!--Colocamos la etiqueta span que estará vinculada a la sig propiedad NID ya que utilizando "asp-validation-for" es como vamos a obtener los mensajes de validación del sig objeto o la sig propiedad, se le va a proporcionar una clase a esta etiqueta span para poder proporcionarle estilo al mensaje que se visualice en esta etiqueta span-->
+                                            <span asp-validation-for="Input.NID" class="text-danger"></span>
+                                        </div>
+                                        <!--Este div va a contener un campo de texto que estará vinculado a la propiedad "name" que vamos a proporcionar un placeholder, un estilo, luego vamos a aplicarle este elemento -->
+                                        <div class="form-group">
+                                            <input asp-for="Input.Name" placeholder="Name" class="form-control" />
+                                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Input.LastName" placeholder="Last Name" class="form-control" />
+                                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Input.PhoneNumber" placeholder="Phone Number" class="form-control" />
+                                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Input.Email" placeholder="Email" class="form-control" />
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Input.Password" placeholder="Password" class="form-control" required />
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        </div>
+                                        <!--Este div la vamos a utilizar para colocar un botón de tipo submit,le proporcionamos un estilo y en el texto del botón vamos a colocar "Register" -->
+                                        <div class="form-group">
+                                            <!--El div que vamos a utilizar para poder agrupar el control-->
+                                            <div class="form-group">
+                                                <!--Colocamos la siguiente directiva para poder crear un control de tipo select-->
+                                                <!--Colocamos la siguiente directiva "Html" para poder llamar al metodo DropDownList, metodo que vamos a utilizar para poder crear un control de tipo select, donde la información que nosotros obtengamos de este control de tipo select donde la información que nosotros obtengas de este control de tipo select, se lo vamos a proporcionar a una propiedad llamada Role, como segundo parámetro se le pasa la clase que se va a utilizar para poder crear la colección de objetos o de datos y poder despliegar esa colección en el control de tipo select, hay que proporcionarle esa colección de datos donde se va a llamar a un objeto o a una propiedad, luego le proporcionamos los siguientes parámetros para poder obtener la información de ese control de tipo select y vamos a indicarle que vamos a obtener el texto de ese control de tipo select, ya que se puede colocar el valor de "value o el valor de text", si nosotros colocamos el valor de text, esto que vamos a obtener el texto de control de tipo select, si colocamos el valor de value vamos a obtener el ID de ese registro y como mensaje por defecto, colocamos "Seleccione un role" y a ese control de tipo select le vamos a proporcionar una clase y por este motivo vamos a colocar lo siguiente  "new { clas= "form-control" })" para poder proporcionarle una clase a ese control y tenga el mismo estilo que los demás controles que nosotros tenemos en este formulario     -->
+                                                @* @Html.DropDownList("Input.Role", new SelectList(Model.Input.rolesLista, "Text", "Text"), "Seleccione un role", new { @class = "form-control" });    });*@
+
+                                            </div>
+            <!--Con "btn-block" agrandamos el botón registro en todo el formulario-->
+                                                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                                    </div>
+                                                <!--Colocamos un div para poder colocar un label, le  proporcionamos un estilo a este label para que el texto que se visualice en este label se muestre de color rojo y el texto que se va a visualizar será la información que nos proporcione la sig. propiedad que vamos a utilizar para poder motrar informaci´´on desde el servidor hacia la interfaz de usuario-->
+                                                <div class="form-group">
+                                                    <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessage)</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <h1>Alma</h1>
+
+
